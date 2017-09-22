@@ -24,6 +24,27 @@
 using namespace std;
 
 bool ransom_note(vector<string> magazine, vector<string> ransom) {
+	unordered_map <string, int> mag;
+    unordered_map <string,int>::iterator it;
+    
+    
+    int i =0;
+    for(i=0; i< magazine.size(); i++) {
+        string s = magazine[i];
+        it = mag.find(s);
+        if (it == mag.end()) { /* Not found */
+            mag.insert(make_pair(magazine[i],1));
+        }
+        else { /* 
+        Found, i->first is f, i->second is ++-- */ 
+        it->second++;
+        }
+    }
+    for(i =0; i< ransom.size();i++){
+        if(mag[ransom[i]]==0) return false;
+        mag[ransom[i]]--;
+    }
+    return true;
     
 }
 
